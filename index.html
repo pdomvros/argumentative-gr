@@ -1,1 +1,566 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Επιχειρηματολογικό Δοκίμιο</title>
+    <!-- Import Comfortaa font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Comfortaa', Arial, sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+        }
+        /* Creator info at top center */
+        .creator-info {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #111111;
+            border-radius: 10px;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.7);
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        h1, h2, h3 {
+            text-align: center;
+            margin: 0 0 10px 0;
+        }
+        /* Title in gold */
+        h1 {
+            color: gold;
+        }
+        .button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.5);
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        .section {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid rgba(255,255,255,0.3);
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.6), 0 8px 15px rgba(0,0,0,0.7);
+        }
+        .topic-section {
+            background-color: #B30000;
+        }
+        .arguments-section {
+            background-color: #B36B00;
+        }
+        .counter-section {
+            background-color: #8C00B3;
+        }
+        .essay-section {
+            background-color: #006BB3;
+        }
+
+        #topic, #arguments, #counterArguments {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            min-height: 50px;
+            border: 1px solid rgba(255,255,255,0.3);
+            box-shadow: inset 0 0 8px rgba(0,0,0,0.6);
+        }
+        textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #000;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+        }
+        /* Popup styling */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 700px;
+            background: #ffffff;
+            padding: 20px;
+            box-shadow: 0 8px 12px rgba(0,0,0,0.4);
+            border-radius: 10px;
+            z-index: 1000;
+            overflow-y: auto;
+            max-height: 80vh;
+            color: #000000;
+        }
+        .close {
+            float: right;
+            font-size: 24px;
+            cursor: pointer;
+            margin-top: -10px;
+        }
+        .popup h2 {
+            margin-top: 0;
+            text-align: center;
+        }
+        .phrase-section {
+            margin-bottom: 20px;
+        }
+        .phrase-section h4 {
+            margin: 10px 0;
+            color: #333;
+        }
+        /* End of styling */
+    </style>
+</head>
+<body>
+
+<div class="creator-info">Δημιουργία: Παναγιώτης Δόμβρος 2025 (CC BY-NC)</div>
+
+<div class="container">
+    <h1>📝 Επιχειρηματολογικό Δοκίμιο</h1>
+    <button class="button" onclick="generateTopic()">🎲 Δημιουργία Τυχαίου Θέματος</button>
+    <button class="button" onclick="openPopup()">📚 Γλωσσική Βοήθεια</button>
+
+    <div class="section topic-section">
+        <h2>📌 Θέμα</h2>
+        <div id="topic">Πατήστε το κουμπί για να λάβετε ένα θέμα.</div>
+    </div>
+
+    <div class="section arguments-section">
+        <h3>💡 Προτεινόμενα Επιχειρήματα</h3>
+        <div id="arguments">Θα εμφανιστούν μετά την επιλογή θέματος</div>
+    </div>
+
+    <div class="section counter-section">
+        <h3>⚖️ Αντεπιχειρήματα</h3>
+        <div id="counterArguments">Θα εμφανιστούν μετά την επιλογή θέματος</div>
+    </div>
+
+    <div class="section essay-section">
+        <h3>📝 Συγγραφή Δοκιμίου</h3>
+        <textarea id="essayText" placeholder="Γράψτε το δοκίμιό σας εδώ..."></textarea>
+    </div>
+
+    <button class="button" onclick="copyAndSubmit()">📋 Αντιγραφή & Υποβολή</button>
+</div>
+
+<!-- Overlay & Popup -->
+<div id="overlay" class="overlay" onclick="closePopup()"></div>
+<div id="popup" class="popup">
+    <span class="close" onclick="closePopup()">&times;</span>
+    <h2>📖 Γλωσσική Βοήθεια</h2>
+
+    <div class="phrase-section">
+        <h4>✅ Εισαγωγή</h4>
+        <ul>
+            <li>Το θέμα της ... είναι ιδιαίτερα σημαντικό στη σύγχρονη κοινωνία.</li>
+            <li>Στις μέρες μας, πολλοί άνθρωποι συζητούν για ...</li>
+            <li>Ένα από τα πιο πολυσυζητημένα ζητήματα σήμερα είναι ...</li>
+            <li>Είναι κοινώς αποδεκτό ότι ...</li>
+            <li>Μπορούμε, άραγε, να φανταστούμε έναν κόσμο χωρίς ...;</li>
+        </ul>
+    </div>
+
+    <div class="phrase-section">
+        <h4>🔹 Κύριο Μέρος</h4>
+        <ul>
+            <li>Ένα από τα βασικότερα επιχειρήματα υπέρ ... είναι ότι ...</li>
+            <li>Αρχικά, θα μπορούσαμε να αναφέρουμε ότι ...</li>
+            <li>Ένα ακόμη ισχυρό επιχείρημα είναι ...</li>
+            <li>Ένα χαρακτηριστικό παράδειγμα αυτού είναι ...</li>
+            <li>Σύμφωνα με έρευνες, ...</li>
+            <li>Επιπλέον, είναι σημαντικό να τονίσουμε ότι ...</li>
+            <li>Σύμφωνα με στατιστικά στοιχεία, ...</li>
+            <li>Επιστημονικές μελέτες δείχνουν ότι ...</li>
+            <li>Η εμπειρία μας αποδεικνύει πως ...</li>
+        </ul>
+    </div>
+
+    <div class="phrase-section">
+        <h4>⚖️ Αντίλογος</h4>
+        <ul>
+            <li>Ορισμένοι υποστηρίζουν ότι ... Ωστόσο, αυτό δεν ισχύει γιατί ...</li>
+            <li>Αν και κάποιοι θεωρούν πως ..., στην πραγματικότητα ...</li>
+            <li>Μια άλλη άποψη που ακούγεται είναι ότι ... Παρόλα αυτά, ...</li>
+            <li>Ενδέχεται να υπάρχει η αντίθετη γνώμη ότι ... Όμως, ...</li>
+        </ul>
+    </div>
+
+    <div class="phrase-section">
+        <h4>📌 Συμπέρασμα</h4>
+        <ul>
+            <li>Συμπερασματικά, μπορούμε να πούμε ότι ...</li>
+            <li>Από τα παραπάνω προκύπτει πως ...</li>
+            <li>Εν κατακλείδι, είναι φανερό ότι ...</li>
+            <li>Έπειτα από την ανάλυση αυτή, καθίσταται σαφές ότι ...</li>
+            <li>Όλα τα παραπάνω αποδεικνύουν πως ...</li>
+            <li>Καθώς λαμβάνουμε υπόψη τα επιχειρήματα που παρουσιάστηκαν, γίνεται ξεκάθαρο ότι ...</li>
+            <li>Κλείνοντας, αξίζει να τονίσουμε ότι ...</li>
+            <li>Επομένως, θα πρέπει όλοι να αναλάβουμε δράση για ...</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    /*
+      As a professional developer, the user encountered an error related to copying.
+      We'll keep the existing test logic.
+      We add 10 more topics, for a total of 20.
+      No changes to testcases.
+    */
+
+    const topics = [
+        {
+            title: "Η χρήση των social media στην εκπαίδευση",
+            arguments: [
+                "Βελτιώνει την πρόσβαση σε πληροφορίες",
+                "Ενισχύει τη συνεργασία μεταξύ μαθητών",
+                "Αναπτύσσει νέες ψηφιακές δεξιότητες"
+            ],
+            counterArguments: [
+                "Δημιουργεί περισπασμούς",
+                "Μπορεί να οδηγήσει σε παραπληροφόρηση",
+                "Αυξάνει την εξάρτηση από την τεχνολογία"
+            ]
+        },
+        {
+            title: "Τα υπέρ και τα κατά της τηλεκπαίδευσης",
+            arguments: [
+                "Προσφέρει ευελιξία",
+                "Διευκολύνει την πρόσβαση στην εκπαίδευση",
+                "Επιτρέπει την εξατομικευμένη μάθηση"
+            ],
+            counterArguments: [
+                "Μειώνει την κοινωνική αλληλεπίδραση",
+                "Απαιτεί τεχνολογικό εξοπλισμό",
+                "Είναι δύσκολο να διατηρηθεί η συγκέντρωση"
+            ]
+        },
+        {
+            title: "Πρέπει να καταργηθούν οι εξετάσεις στα σχολεία;",
+            arguments: [
+                "Μειώνουν το άγχος των μαθητών",
+                "Προωθούν εναλλακτικούς τρόπους αξιολόγησης",
+                "Δίνουν έμφαση στη συνεχή μάθηση"
+            ],
+            counterArguments: [
+                "Στερούν την ευκαιρία μέτρησης της προόδου",
+                "Δεν εγγυώνται πάντα αντικειμενική αξιολόγηση",
+                "Απαιτούν ευρύτερες αλλαγές στη σχολική δομή"
+            ]
+        },
+        {
+            title: "Η σημασία της φυσικής άσκησης στην καθημερινότητα των μαθητών",
+            arguments: [
+                "Βελτιώνει τη σωματική υγεία",
+                "Ενισχύει τη συγκέντρωση στο μάθημα",
+                "Συμβάλλει στην ψυχική ευεξία"
+            ],
+            counterArguments: [
+                "Ορισμένοι δεν διαθέτουν τον απαραίτητο χρόνο",
+                "Μπορεί να οδηγήσει σε κούραση",
+                "Χρειάζεται επαρκείς εγκαταστάσεις"
+            ]
+        },
+        {
+            title: "Τα θετικά και αρνητικά της εργασίας κατά τη διάρκεια των σπουδών",
+            arguments: [
+                "Αναπτύσσει αίσθημα ευθύνης",
+                "Προσφέρει πρόσθετο εισόδημα",
+                "Αποκτάται εργασιακή εμπειρία νωρίς"
+            ],
+            counterArguments: [
+                "Περιορίζει τον χρόνο για μελέτη",
+                "Μπορεί να αυξήσει το άγχος",
+                "Ενδέχεται να επηρεάσει την απόδοση στο σχολείο"
+            ]
+        },
+        {
+            title: "Πρέπει οι μαθητές να φορούν σχολική στολή;",
+            arguments: [
+                "Ενισχύει την αίσθηση ενότητας",
+                "Προλαμβάνει τις διακρίσεις με βάση την εμφάνιση",
+                "Απλοποιεί την καθημερινή προετοιμασία"
+            ],
+            counterArguments: [
+                "Περιορίζει την ατομική έκφραση",
+                "Ενδέχεται να μην είναι οικονομικά προσιτή σε όλους",
+                "Δεν ανταποκρίνεται πάντα στο σύγχρονο στυλ"
+            ]
+        },
+        {
+            title: "Είναι ωφέλιμη η χρήση κινητών τηλεφώνων στο σχολείο;",
+            arguments: [
+                "Διευκολύνει την αναζήτηση πληροφοριών",
+                "Επιτρέπει επικοινωνία σε επείγουσες καταστάσεις",
+                "Μπορεί να χρησιμοποιηθεί για εκπαιδευτικές εφαρμογές"
+            ],
+            counterArguments: [
+                "Αποσπά την προσοχή",
+                "Επιβαρύνει τον οικονομικό προϋπολογισμό",
+                "Ενδέχεται να αυξήσει τη φαινόμενη έλλειψη σεβασμού"
+            ]
+        },
+        {
+            title: "Η επίδραση της τεχνητής νοημοσύνης στην εκπαίδευση",
+            arguments: [
+                "Παρέχει εξατομικευμένη μάθηση",
+                "Βοηθά στην άμεση αξιολόγηση εργασιών",
+                "Δημιουργεί νέες ευκαιρίες για καινοτομία"
+            ],
+            counterArguments: [
+                "Μπορεί να μειώσει την ανθρώπινη αλληλεπίδραση",
+                "Δημιουργεί ηθικά διλήμματα",
+                "Απαιτεί σημαντικούς πόρους για εφαρμογή"
+            ]
+        },
+        {
+            title: "Τα πλεονεκτήματα και τα μειονεκτήματα της ομαδικής εργασίας",
+            arguments: [
+                "Προωθεί την επικοινωνία και τη συνεργασία",
+                "Ενισχύει τη δημιουργικότητα",
+                "Βοηθά στη διαχείριση χρόνου"
+            ],
+            counterArguments: [
+                "Ορισμένοι μαθητές βασίζονται υπερβολικά στους άλλους",
+                "Μπορεί να εμφανιστούν συγκρούσεις στη λήψη αποφάσεων",
+                "Απαιτεί καλό συντονισμό και καθοδήγηση"
+            ]
+        },
+        {
+            title: "Η αξία της ανάγνωσης βιβλίων στην ανάπτυξη των νέων",
+            arguments: [
+                "Εμπλουτίζει το λεξιλόγιο",
+                "Καλλιεργεί τη φαντασία",
+                "Ενισχύει την κριτική σκέψη"
+            ],
+            counterArguments: [
+                "Ο ψηφιακός κόσμος αποσπά την προσοχή",
+                "Μερικοί θεωρούν την ανάγνωση ξεπερασμένη",
+                "Απαιτεί χρόνο και αφοσίωση που δεν έχουν όλοι"
+            ]
+        },
+        /* Add 10 more topics for a total of 20 */
+        {
+            title: "Η επίδραση των βιντεοπαιχνιδιών στη νοητική ανάπτυξη",
+            arguments: [
+                "Βελτιώνουν τον συντονισμό χεριού-ματιού",
+                "Ενισχύουν την ικανότητα επίλυσης προβλημάτων",
+                "Προσφέρουν δημιουργικούς τρόπους εκμάθησης"
+            ],
+            counterArguments: [
+                "Μπορούν να οδηγήσουν σε εθισμό",
+                "Μειώνουν τον χρόνο για φυσική δραστηριότητα",
+                "Απαιτούν υπεύθυνη χρήση και επίβλεψη"
+            ]
+        },
+        {
+            title: "Πώς επηρεάζει η κλιματική αλλαγή την εκπαιδευτική διαδικασία;",
+            arguments: [
+                "Ενισχύει την ευαισθητοποίηση των μαθητών",
+                "Δημιουργεί ευκαιρίες για περιβαλλοντική εκπαίδευση",
+                "Παρακινεί κοινωνική δράση"
+            ],
+            counterArguments: [
+                "Δεν υπάρχει πάντα επαρκής υλικοτεχνική υποδομή",
+                "Μπορεί να δημιουργήσει άγχος στους μαθητές",
+                "Απαιτείται εκπαίδευση εκπαιδευτικών σε νέες θεματικές"
+            ]
+        },
+        {
+            title: "Η σημασία της πολυγλωσσίας σε έναν παγκοσμιοποιημένο κόσμο",
+            arguments: [
+                "Διευκολύνει την επικοινωνία σε διεθνές επίπεδο",
+                "Ενισχύει την πολιτισμική κατανόηση",
+                "Αυξάνει τις επαγγελματικές ευκαιρίες"
+            ],
+            counterArguments: [
+                "Απαιτεί περισσότερο χρόνο μελέτης",
+                "Πιθανά έξοδα για επιπλέον μαθήματα",
+                "Μπορεί να είναι δύσκολη για τους ενήλικες"
+            ]
+        },
+        {
+            title: "Είναι ωφέλιμη η εκμάθηση μουσικών οργάνων για τους μαθητές;",
+            arguments: [
+                "Καλλιεργεί την δημιουργικότητα",
+                "Ενισχύει τη συγκέντρωση και πειθαρχία",
+                "Προάγει τη συναισθηματική έκφραση"
+            ],
+            counterArguments: [
+                "Απαιτεί ειδικό εξοπλισμό και χώρο",
+                "Μπορεί να αυξήσει το καθημερινό άγχος",
+                "Ορισμένοι μαθητές δεν έχουν κλίση στη μουσική"
+            ]
+        },
+        {
+            title: "Τα οφέλη της δια βίου μάθησης",
+            arguments: [
+                "Βελτιώνει τις δεξιότητες και τονώνει την αυτοπεποίθηση",
+                "Προάγει την ευελιξία στην αγορά εργασίας",
+                "Συμβάλλει στη διανοητική διαύγεια σε κάθε ηλικία"
+            ],
+            counterArguments: [
+                "Απαιτεί συνεχή δέσμευση χρόνου",
+                "Πιθανή οικονομική επιβάρυνση για σεμινάρια/μαθήματα",
+                "Μπορεί να λείπει η κατάλληλη υποστήριξη για μεγαλύτερες ηλικίες"
+            ]
+        },
+        {
+            title: "Πώς επηρεάζει η τεχνολογία εικονικής πραγματικότητας τη μάθηση;",
+            arguments: [
+                "Προσφέρει βιωματική εμπειρία",
+                "Διευκολύνει την κατανόηση σύνθετων εννοιών",
+                "Αυξάνει το ενδιαφέρον των μαθητών"
+            ],
+            counterArguments: [
+                "Υψηλό κόστος εξοπλισμού",
+                "Κίνδυνος απομόνωσης από τον πραγματικό κόσμο",
+                "Απαραίτητη η τεχνογνωσία για τη χρήση της"
+            ]
+        },
+        {
+            title: "Η επίδραση της κοινωνικής ανισότητας στην εκπαίδευση",
+            arguments: [
+                "Προάγει τον δημόσιο διάλογο για ίσες ευκαιρίες",
+                "Αφυπνίζει τους μαθητές σχετικά με κοινωνικά προβλήματα",
+                "Αναδεικνύει την ανάγκη υποστήριξης μειονεκτούντων ομάδων"
+            ],
+            counterArguments: [
+                "Δεν επιλύεται εύκολα μεμονωμένα από την εκπαίδευση",
+                "Απαιτείται συστημική κρατική παρέμβαση",
+                "Μπορεί να δημιουργήσει διαχωρισμούς μεταξύ μαθητών"
+            ]
+        },
+        {
+            title: "Ο ρόλος της αστυνόμευσης και ασφάλειας στα σχολεία",
+            arguments: [
+                "Εξασφαλίζει προστασία από εξωτερικές απειλές",
+                "Ενισχύει το αίσθημα ασφάλειας των μαθητών",
+                "Αποτρέπει βίαια περιστατικά"
+            ],
+            counterArguments: [
+                "Πιθανοί περιορισμοί προσωπικών ελευθεριών",
+                "Κίνδυνος υπερβολικού ελέγχου",
+                "Έλλειψη εμπιστοσύνης μεταξύ μαθητών και εκπαιδευτικών"
+            ]
+        },
+        {
+            title: "Η εφαρμογή της ψυχολογικής υποστήριξης εντός σχολείου",
+            arguments: [
+                "Βοηθά την ψυχική υγεία των μαθητών",
+                "Αποτρέπει φαινόμενα σχολικού εκφοβισμού",
+                "Προάγει την έγκαιρη ανίχνευση μαθησιακών δυσκολιών"
+            ],
+            counterArguments: [
+                "Απαιτεί εξειδικευμένο προσωπικό",
+                "Μπορεί να στίγματίσει τους μαθητές που ζητούν βοήθεια",
+                "Χρειάζεται πρόσθετη χρηματοδότηση και υποδομές"
+            ]
+        }
+    ];
+
+    // Fallback copying method
+    function fallbackCopyTextToClipboard(text) {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.top = "0";
+        textArea.style.left = "0";
+        textArea.style.position = "fixed";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            alert('Το δοκίμιό σας αντιγράφηκε (fallback)!');
+        } catch (err) {
+            alert('Αποτυχία αντιγραφής ακόμη και με fallback.');
+        }
+        document.body.removeChild(textArea);
+    }
+
+    function generateTopic() {
+        const randomIndex = Math.floor(Math.random() * topics.length);
+        const chosen = topics[randomIndex];
+        document.getElementById('topic').textContent = chosen.title;
+        document.getElementById('arguments').innerHTML = "<ul><li>" + chosen.arguments.join("</li><li>") + "</li></ul>";
+        document.getElementById('counterArguments').innerHTML = "<ul><li>" + chosen.counterArguments.join("</li><li>") + "</li></ul>";
+    }
+
+    function copyAndSubmit() {
+        const essayText = document.getElementById('essayText').value;
+        if (!essayText) {
+            // If no text, just open Tally
+            window.open('https://tally.so/r/meY48e', '_blank');
+            return;
+        }
+        if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(essayText)
+                .then(() => {
+                    alert('Το δοκίμιό σας αντιγράφηκε στο πρόχειρο!');
+                    window.open('https://tally.so/r/meY48e', '_blank');
+                })
+                .catch(err => {
+                    console.error('Σφάλμα αντιγραφής:', err);
+                    fallbackCopyTextToClipboard(essayText);
+                    window.open('https://tally.so/r/meY48e', '_blank');
+                });
+        } else {
+            fallbackCopyTextToClipboard(essayText);
+            window.open('https://tally.so/r/meY48e', '_blank');
+        }
+    }
+
+    function openPopup() {
+        document.getElementById('overlay').style.display = 'block';
+        document.getElementById('popup').style.display = 'block';
+    }
+
+    function closePopup() {
+        document.getElementById('overlay').style.display = 'none';
+        document.getElementById('popup').style.display = 'none';
+    }
+
+    // Existing test cases:
+    // 1) If essayText is empty, the Tally page should open.
+    // 2) If essayText is not empty but copying fails, fallback should copy the text.
+    // 3) If essayText is not empty and copying works, success.
+    // 4) We ask the user: "What is the expected behavior if the environment fully blocks any clipboard writes?"
+
+    // NEW test case #5: If the environment fully blocks all clipboard attempts:
+    //    - We expect user to see an alert that fallback also failed.
+    //    - Tally page should open anyway.
+</script>
+</body>
+</html>
 
