@@ -1,100 +1,195 @@
 <!DOCTYPE html>
-<html>
+<html lang="el">
 <head>
+    <meta charset="UTF-8">
     <title>Επιχειρηματολογικό Δοκίμιο</title>
-    <!-- Import Comfortaa font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Comfortaa', Arial, sans-serif;
-            background-color: #000000;
-            color: #ffffff;
-            margin: 0;
-            padding: 20px;
+        * {
+            box-sizing: border-box;
         }
-        /* Creator info at top center */
-        .creator-info {
-            text-align: center;
-            font-weight: bold;
-            margin-bottom: 20px;
+
+        body {
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #f5f5f5;
+            color: #333333;
+            margin: 0;
+            padding: 0;
         }
 
         .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #111111;
-            border-radius: 10px;
-            box-shadow: 0 8px 15px rgba(0,0,0,0.7);
-            border: 2px solid rgba(255,255,255,0.2);
-        }
-        h1, h2, h3 {
-            text-align: center;
-            margin: 0 0 10px 0;
-        }
-        /* Title in gold */
-        h1 {
-            color: gold;
-        }
-        .button {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-align: center;
-            font-size: 18px;
-            font-weight: 600;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.5);
-        }
-        .button:hover {
-            background-color: #45a049;
-        }
-        .section {
-            margin: 20px 0;
-            padding: 15px;
-            border-radius: 8px;
-            border: 2px solid rgba(255,255,255,0.3);
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.6), 0 8px 15px rgba(0,0,0,0.7);
-        }
-        .topic-section {
-            background-color: #B30000;
-        }
-        .arguments-section {
-            background-color: #B36B00;
-        }
-        .counter-section {
-            background-color: #8C00B3;
-        }
-        .essay-section {
-            background-color: #006BB3;
+            max-width: 1200px;
+            margin: 20px auto 40px auto;
+            padding: 24px 32px 32px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e0e0e0;
         }
 
-        #topic, #arguments, #counterArguments {
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 10px;
-            border-radius: 5px;
-            min-height: 50px;
-            border: 1px solid rgba(255,255,255,0.3);
-            box-shadow: inset 0 0 8px rgba(0,0,0,0.6);
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 8px;
+            text-align: center;
         }
+
+        .page-header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            color: #3b3b3b;
+        }
+
+        .logo {
+            height: 60px;
+            width: auto;
+        }
+
+        .title-emoji {
+            font-size: 2rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            margin: 6px 0 18px 0;
+            font-size: 1.05rem;
+            color: #666666;
+        }
+
+        .student-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 8px 16px;
+            margin-bottom: 16px;
+            font-size: 0.95rem;
+        }
+
+        .info-group {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .student-info label {
+            font-weight: bold;
+        }
+
+        .student-info input {
+            padding: 6px 8px;
+            font-size: 0.95rem;
+            border-radius: 4px;
+            border: 1px solid #cccccc;
+            min-width: 160px;
+            font-family: Georgia, "Times New Roman", serif;
+        }
+
+        .button-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .button {
+            flex: 1 1 220px;
+            padding: 10px 14px;
+            background-color: #2c7be5;
+            color: #ffffff;
+            border: none;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            text-align: center;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+
+        .button:hover {
+            background-color: #1f67c4;
+            transform: translateY(-1px);
+        }
+
+        .button.secondary {
+            background-color: #6c757d;
+        }
+
+        .button.secondary:hover {
+            background-color: #5a636b;
+        }
+
+        .section {
+            margin: 18px 0;
+            padding: 16px 18px;
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+            background-color: #fafafa;
+        }
+
+        .section h2,
+        .section h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            text-align: left;
+            color: #3b3b3b;
+        }
+
+        .topic-section {
+            border-left: 4px solid #2c7be5;
+        }
+
+        .arguments-section {
+            border-left: 4px solid #38a169;
+        }
+
+        .counter-section {
+            border-left: 4px solid #d69e2e;
+        }
+
+        .essay-section {
+            border-left: 4px solid #805ad5;
+        }
+
+        #topic,
+        #arguments,
+        #counterArguments {
+            background-color: #ffffff;
+            padding: 10px 12px;
+            border-radius: 6px;
+            border: 1px solid #e0e0e0;
+            min-height: 50px;
+        }
+
+        #topic {
+            font-weight: bold;
+        }
+
+        #arguments ul,
+        #counterArguments ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
         textarea {
             width: 100%;
-            min-height: 200px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-            color: #000;
-            box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+            min-height: 220px;
+            padding: 10px 12px;
+            border: 1px solid #cccccc;
+            border-radius: 6px;
+            font-size: 1rem;
+            color: #333333;
+            background-color: #ffffff;
+            font-family: Georgia, "Times New Roman", serif;
+            resize: vertical;
         }
-        /* Popup styling */
+
+        textarea::placeholder {
+            color: #999999;
+        }
+
+        /* Popup styling (Γλωσσική βοήθεια) */
         .overlay {
             display: none;
             position: fixed;
@@ -102,9 +197,10 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.35);
             z-index: 999;
         }
+
         .popup {
             display: none;
             position: fixed;
@@ -112,58 +208,188 @@
             left: 50%;
             transform: translate(-50%, -50%);
             width: 90%;
-            max-width: 700px;
+            max-width: 760px;
             background: #ffffff;
-            padding: 20px;
-            box-shadow: 0 8px 12px rgba(0,0,0,0.4);
-            border-radius: 10px;
+            padding: 22px 24px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+            border-radius: 12px;
             z-index: 1000;
             overflow-y: auto;
             max-height: 80vh;
             color: #000000;
+            border: 1px solid #e0e0e0;
         }
+
         .close {
             float: right;
             font-size: 24px;
             cursor: pointer;
-            margin-top: -10px;
+            margin-top: -4px;
+            margin-right: -4px;
         }
+
         .popup h2 {
             margin-top: 0;
             text-align: center;
+            margin-bottom: 12px;
         }
+
         .phrase-section {
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
+
         .phrase-section h4 {
             margin: 10px 0;
-            color: #333;
+            color: #444444;
         }
-        /* End of styling */
+
+        .phrase-section ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+
+        .phrase-section li {
+            margin-bottom: 4px;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666666;
+            margin: 0 auto 18px auto;
+            padding: 8px 12px;
+        }
+
+        /* Εκτύπωση / PDF – να φαίνονται ΜΟΝΟ όνομα, τάξη, ημερομηνία & κείμενο */
+        @media print {
+            body {
+                background-color: #ffffff;
+                color: #000000;
+                margin: 0;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                border: none;
+                margin: 0;
+                max-width: none;
+                width: 100%;
+                border-radius: 0;
+                padding: 10mm 15mm;
+            }
+
+            /* Κρύβουμε ό,τι δεν θέλουμε στο print */
+            .page-header,
+            .subtitle,
+            .button-row,
+            .topic-section,
+            .arguments-section,
+            .counter-section,
+            footer,
+            #overlay,
+            #popup {
+                display: none !important;
+            }
+
+            .essay-section {
+                border-left: none;
+                padding-left: 0;
+                padding-right: 0;
+            }
+
+            .essay-section h3 {
+                display: none !important;
+            }
+
+            .student-info {
+                justify-content: flex-start;
+                margin-bottom: 10mm;
+            }
+
+            .info-group {
+                display: block;
+                margin-bottom: 4mm;
+            }
+
+            .info-group label {
+                display: block;
+                margin-bottom: 1mm;
+            }
+
+            .student-info input {
+                border: none;
+                border-bottom: 1px solid #000000;
+                border-radius: 0;
+                padding-left: 0;
+                padding-right: 0;
+                font-size: 1rem;
+                width: 100%;
+                background-color: #ffffff !important;
+            }
+
+            textarea {
+                min-height: 180mm;
+                border: none;
+                border-top: 1px solid #000000;
+                padding-left: 0;
+                padding-right: 0;
+                border-radius: 0;
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
 
-<div class="creator-info">Δημιουργία: Παναγιώτης Δόμβρος 2025 (CC BY-NC)</div>
-
 <div class="container">
-    <h1>📝 Επιχειρηματολογικό Δοκίμιο</h1>
-    <button class="button" onclick="generateTopic()">🎲 Δημιουργία Τυχαίου Θέματος</button>
-    <button class="button" onclick="openPopup()">📚 Γλωσσική Βοήθεια</button>
+
+    <header class="page-header">
+        <!-- Logo αριστερά -->
+        <img src="greek logo.png" alt="Λογότυπο" class="logo">
+        <h1>Επιχειρηματολογικό Δοκίμιο</h1>
+        <!-- Emoji δεξιά -->
+        <span class="title-emoji" aria-hidden="true">📝</span>
+    </header>
+
+    <div class="subtitle">
+        Εργαλείο για παραγωγή επιχειρηματολογικού δοκιμίου με τυχαία θέματα και γλωσσική υποστήριξη.
+    </div>
+
+    <div class="student-info">
+        <div class="info-group">
+            <label for="studentName">Όνομα μαθητή/μαθήτριας:</label>
+            <input type="text" id="studentName" placeholder="Πληκτρολογήστε το όνομά σας εδώ">
+        </div>
+        <div class="info-group">
+            <label for="className">Τάξη:</label>
+            <input type="text" id="className" placeholder="π.χ. Β1, Γ2">
+        </div>
+        <div class="info-group">
+            <label for="currentDate">Ημερομηνία:</label>
+            <input type="date" id="currentDate">
+        </div>
+    </div>
+
+    <div class="button-row">
+        <button class="button" onclick="generateTopic()">🎲 Δημιουργία Τυχαίου Θέματος</button>
+        <button class="button" onclick="openPopup()">📚 Γλωσσική Βοήθεια</button>
+        <button class="button secondary" onclick="printToPDF()">💾 Αποθήκευση / Εκτύπωση σε PDF</button>
+    </div>
 
     <div class="section topic-section">
         <h2>📌 Θέμα</h2>
-        <div id="topic">Πατήστε το κουμπί για να λάβετε ένα θέμα.</div>
+        <div id="topic">Πατήστε «Δημιουργία Τυχαίου Θέματος» για να εμφανιστεί ένα θέμα.</div>
     </div>
 
     <div class="section arguments-section">
         <h3>💡 Προτεινόμενα Επιχειρήματα</h3>
-        <div id="arguments">Θα εμφανιστούν μετά την επιλογή θέματος</div>
+        <div id="arguments">Τα επιχειρήματα θα εμφανιστούν μετά την επιλογή θέματος.</div>
     </div>
 
     <div class="section counter-section">
         <h3>⚖️ Αντεπιχειρήματα</h3>
-        <div id="counterArguments">Θα εμφανιστούν μετά την επιλογή θέματος</div>
+        <div id="counterArguments">Τα αντεπιχειρήματα θα εμφανιστούν μετά την επιλογή θέματος.</div>
     </div>
 
     <div class="section essay-section">
@@ -171,8 +397,15 @@
         <textarea id="essayText" placeholder="Γράψτε το δοκίμιό σας εδώ..."></textarea>
     </div>
 
-    <button class="button" onclick="copyAndSubmit()">📋 Αντιγραφή & Υποβολή</button>
+    <div class="button-row">
+        <button class="button" onclick="copyEssay()">📋 Αντιγραφή στο πρόχειρο</button>
+    </div>
+
 </div>
+
+<footer>
+    ✨✍️ Δημιουργία: Παναγιώτης Δόμβρος, Εκπαιδευτικός Αγγλικών-Θεατρολόγος, Με την Επιφύλαξη Παντός Δικαιώματος ✍️✨
+</footer>
 
 <!-- Overlay & Popup -->
 <div id="overlay" class="overlay" onclick="closePopup()"></div>
@@ -232,13 +465,7 @@
 </div>
 
 <script>
-    /*
-      As a professional developer, the user encountered an error related to copying.
-      We'll keep the existing test logic.
-      We add 10 more topics, for a total of 20.
-      No changes to testcases.
-    */
-
+    // Πίνακας θεμάτων
     const topics = [
         {
             title: "Η χρήση των social media στην εκπαίδευση",
@@ -370,7 +597,6 @@
                 "Απαιτεί χρόνο και αφοσίωση που δεν έχουν όλοι"
             ]
         },
-        /* Add 10 more topics for a total of 20 */
         {
             title: "Η επίδραση των βιντεοπαιχνιδιών στη νοητική ανάπτυξη",
             arguments: [
@@ -413,7 +639,7 @@
         {
             title: "Είναι ωφέλιμη η εκμάθηση μουσικών οργάνων για τους μαθητές;",
             arguments: [
-                "Καλλιεργεί την δημιουργικότητα",
+                "Καλλιεργεί τη δημιουργικότητα",
                 "Ενισχύει τη συγκέντρωση και πειθαρχία",
                 "Προάγει τη συναισθηματική έκφραση"
             ],
@@ -490,7 +716,17 @@
         }
     ];
 
-    // Fallback copying method
+    function setTodayDate() {
+        const dateField = document.getElementById('currentDate');
+        if (!dateField) return;
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const day = String(today.getDate()).padStart(2, '0');
+        // input type="date" θέλει μορφή YYYY-MM-DD
+        dateField.value = `${year}-${month}-${day}`;
+    }
+
     function fallbackCopyTextToClipboard(text) {
         const textArea = document.createElement("textarea");
         textArea.value = text;
@@ -513,31 +749,30 @@
         const randomIndex = Math.floor(Math.random() * topics.length);
         const chosen = topics[randomIndex];
         document.getElementById('topic').textContent = chosen.title;
-        document.getElementById('arguments').innerHTML = "<ul><li>" + chosen.arguments.join("</li><li>") + "</li></ul>";
-        document.getElementById('counterArguments').innerHTML = "<ul><li>" + chosen.counterArguments.join("</li><li>") + "</li></ul>";
+        document.getElementById('arguments').innerHTML =
+            "<ul><li>" + chosen.arguments.join("</li><li>") + "</li></ul>";
+        document.getElementById('counterArguments').innerHTML =
+            "<ul><li>" + chosen.counterArguments.join("</li><li>") + "</li></ul>";
     }
 
-    function copyAndSubmit() {
-        const essayText = document.getElementById('essayText').value;
+    // ΜΟΝΟ αντιγραφή στο πρόχειρο
+    function copyEssay() {
+        const essayText = document.getElementById('essayText').value.trim();
         if (!essayText) {
-            // If no text, just open Tally
-            window.open('https://tally.so/r/meY48e', '_blank');
+            alert('Δεν υπάρχει κείμενο για αντιγραφή.');
             return;
         }
         if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
             navigator.clipboard.writeText(essayText)
                 .then(() => {
                     alert('Το δοκίμιό σας αντιγράφηκε στο πρόχειρο!');
-                    window.open('https://tally.so/r/meY48e', '_blank');
                 })
                 .catch(err => {
                     console.error('Σφάλμα αντιγραφής:', err);
                     fallbackCopyTextToClipboard(essayText);
-                    window.open('https://tally.so/r/meY48e', '_blank');
                 });
         } else {
             fallbackCopyTextToClipboard(essayText);
-            window.open('https://tally.so/r/meY48e', '_blank');
         }
     }
 
@@ -551,16 +786,12 @@
         document.getElementById('popup').style.display = 'none';
     }
 
-    // Existing test cases:
-    // 1) If essayText is empty, the Tally page should open.
-    // 2) If essayText is not empty but copying fails, fallback should copy the text.
-    // 3) If essayText is not empty and copying works, success.
-    // 4) We ask the user: "What is the expected behavior if the environment fully blocks any clipboard writes?"
+    function printToPDF() {
+        window.print();
+    }
 
-    // NEW test case #5: If the environment fully blocks all clipboard attempts:
-    //    - We expect user to see an alert that fallback also failed.
-    //    - Tally page should open anyway.
+    document.addEventListener('DOMContentLoaded', setTodayDate);
 </script>
+
 </body>
 </html>
-
